@@ -34,8 +34,8 @@
 
     #baby-img {
       position: absolute;
-      width: 100px;
-      height: 100px;
+      width: 150px;  /* Increased from 100px to 150px */
+      height: 150px; /* Increased from 100px to 150px */
       border-radius: 50%;
       cursor: pointer;
       transition: top 0.3s, left 0.3s;
@@ -51,6 +51,16 @@
       color: white;
       text-shadow: 2px 2px 4px black;
       display: none;
+    }
+
+    #instructions {
+      position: absolute;
+      top: 20%;
+      width: 100%;
+      text-align: center;
+      font-size: 1.5em;
+      color: white;
+      text-shadow: 2px 2px 4px black;
     }
 
     #final-screen {
@@ -118,6 +128,7 @@
 
   <!-- Game Screen -->
   <div id="game-screen" class="screen">
+    <div id="instructions">Tap on the image to catch me, Mumma!</div>
     <img src="your-baby-photo.jpg" alt="Baby Silppi" id="baby-img" />
     <div id="message">Wow! You caught your smarty girl!</div>
   </div>
@@ -133,7 +144,7 @@
          to work hard and never give up.<br>
          I love you 💖</p>
     </div>
-    <div id="footer">Made by your coder girl-silppi ;)👩‍💻</div>
+    <div id="footer">Made by your coder girl 👩‍💻</div>
     <!-- Profile photo at the corner near footer -->
     <img src="profile-photo.jpg" id="coder-photo" alt="Coder Profile Photo" />
   </div>
@@ -143,18 +154,19 @@
     const message = document.getElementById('message');
     const gameScreen = document.getElementById('game-screen');
     const finalScreen = document.getElementById('final-screen');
+    const instructions = document.getElementById('instructions');
 
-    // Move image randomly on screen
+    // Move image randomly on screen, slower movement
     function moveBaby() {
-      const maxX = window.innerWidth - 100;
-      const maxY = window.innerHeight - 100;
+      const maxX = window.innerWidth - 150; // Adjusted for larger image size
+      const maxY = window.innerHeight - 150; // Adjusted for larger image size
       const x = Math.random() * maxX;
       const y = Math.random() * maxY;
       babyImg.style.left = `${x}px`;
       babyImg.style.top = `${y}px`;
     }
 
-    let moveInterval = setInterval(moveBaby, 1000);
+    let moveInterval = setInterval(moveBaby, 2000); // Slow down the movement to 2 seconds
 
     babyImg.addEventListener('click', () => {
       clearInterval(moveInterval);
