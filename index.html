@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -28,7 +28,7 @@
     }
 
     #game-screen {
-      background-image: url('bg1.jpg'); /* Replace with your game background */
+      background-image: url('bg1.jpg');
       display: block;
     }
 
@@ -64,7 +64,7 @@
     }
 
     #final-screen {
-      background-image: url('bg2.jpg'); /* Replace with your final screen background */
+      background-image: url('bg2.jpg');
       color: white;
       text-align: center;
       padding-top: 10%;
@@ -81,7 +81,6 @@
       position: absolute;
       top: 10%;
       max-width: 300px;
-      width: 100%;
       height: auto;
       border-radius: 15px;
       box-shadow: 0 0 10px white;
@@ -209,7 +208,7 @@
       babyImg.style.top = `${y}px`;
     }
 
-    let moveInterval = setInterval(moveBaby, 2000);
+    let moveInterval = setInterval(moveBaby, 1500); // Moved a little faster
 
     babyImg.addEventListener('click', () => {
       clearInterval(moveInterval);
