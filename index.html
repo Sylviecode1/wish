@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,8 +34,8 @@
 
     #baby-img {
       position: absolute;
-      width: 150px;  /* Increased from 100px to 150px */
-      height: 150px; /* Increased from 100px to 150px */
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       cursor: pointer;
       transition: top 0.3s, left 0.3s;
@@ -81,7 +80,7 @@
     .side-photo {
       position: absolute;
       top: 10%;
-      width: 250px;  /* Increased from 150px to 250px */
+      width: 500px;
       height: auto;
       border-radius: 15px;
       box-shadow: 0 0 10px white;
@@ -105,14 +104,49 @@
       text-shadow: 1px 1px 4px black;
     }
 
+    #footer span {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
     #coder-photo {
       position: absolute;
       bottom: 20px;
-      right: 20px;
+      right: 140px;
       width: 50px;
       height: 50px;
       border-radius: 50%;
       box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    .heart {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: red;
+      clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 50% 75%, 25% 100%, 0% 35%);
+      animation: floatHeart 5s infinite ease-in-out;
+      opacity: 0;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+      }
+      25% {
+        transform: translateX(30px) translateY(-50px);
+      }
+      50% {
+        transform: translateX(-30px) translateY(-100px);
+      }
+      75% {
+        transform: translateX(30px) translateY(-150px);
+      }
+      100% {
+        transform: translateX(0) translateY(-200px);
+        opacity: 0;
+      }
     }
 
     @media (max-width: 600px) {
@@ -120,7 +154,7 @@
         font-size: 1.3em;
       }
       .side-photo {
-        width: 150px;  /* Adjust for smaller screens */
+        width: 150px;
       }
     }
   </style>
@@ -145,9 +179,18 @@
          to work hard and never give up.<br>
          I love you 💖</p>
     </div>
-    <div id="footer">Made by your coder girl 👩‍💻</div>
-    <!-- Profile photo at the corner near footer -->
-    <img src="profile-photo.jpg" id="coder-photo" alt="Coder Profile Photo" />
+    <div id="footer">
+      <img src="profile-photo.jpg" id="coder-photo" alt="Silppi's Profile Photo" />
+      Made by your coder girl <span>- Silppi</span>
+    </div>
+
+    <!-- Floating Hearts -->
+    <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="heart" style="left: 20%; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 50%; animation-delay: 3s;"></div>
+    <div class="heart" style="left: 70%; animation-delay: 4s;"></div>
+    <div class="heart" style="left: 85%; animation-delay: 1.5s;"></div>
   </div>
 
   <script>
@@ -155,19 +198,17 @@
     const message = document.getElementById('message');
     const gameScreen = document.getElementById('game-screen');
     const finalScreen = document.getElementById('final-screen');
-    const instructions = document.getElementById('instructions');
 
-    // Move image randomly on screen, slower movement
     function moveBaby() {
-      const maxX = window.innerWidth - 150; // Adjusted for larger image size
-      const maxY = window.innerHeight - 150; // Adjusted for larger image size
+      const maxX = window.innerWidth - 150;
+      const maxY = window.innerHeight - 150;
       const x = Math.random() * maxX;
       const y = Math.random() * maxY;
       babyImg.style.left = `${x}px`;
       babyImg.style.top = `${y}px`;
     }
 
-    let moveInterval = setInterval(moveBaby, 2000); // Slow down the movement to 2 seconds
+    let moveInterval = setInterval(moveBaby, 2000);
 
     babyImg.addEventListener('click', () => {
       clearInterval(moveInterval);
@@ -179,7 +220,8 @@
     });
 
     window.addEventListener('resize', moveBaby);
-    moveBaby(); // Initial position
+    moveBaby();
   </script>
+
 </body>
 </html>
