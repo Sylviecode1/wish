@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catch Baby Silppi!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+    }
+
+    .screen {
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+
+    #game-screen {
+      background-image: url('bg1.jpg'); /* Replace with your game background */
+      display: block;
+    }
+
+    #baby-img {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: top 0.3s, left 0.3s;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    #message {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      font-size: 2em;
+      color: white;
+      text-shadow: 2px 2px 4px black;
+      display: none;
+    }
+
+    #final-screen {
+      background-image: url('bg2.jpg'); /* Replace with your final screen background */
+      color: white;
+      text-align: center;
+      padding-top: 10%;
+    }
+
+    #final-text {
+      font-size: 2em;
+      width: 80%;
+      margin: auto;
+      text-shadow: 2px 2px 6px black;
+    }
+
+    .side-photo {
+      position: absolute;
+      top: 10%;
+      width: 150px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 0 10px white;
+    }
+
+    #left-photo {
+      left: 5%;
+    }
+
+    #right-photo {
+      right: 5%;
+    }
+
+    #footer {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 1.2em;
+      color: #fff;
+      text-shadow: 1px 1px 4px black;
+    }
+
+    #coder-photo {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 600px) {
+      #final-text {
+        font-size: 1.3em;
+      }
+      .side-photo {
+        width: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Game Screen -->
+  <div id="game-screen" class="screen">
+    <img src="your-baby-photo.jpg" alt="Baby Silppi" id="baby-img" />
+    <div id="message">Wow! You caught your smarty girl!</div>
+  </div>
+
+  <!-- Final Mother's Day Screen -->
+  <div id="final-screen" class="screen">
+    <img src="left-photo.jpg" class="side-photo" id="left-photo" alt="Left photo"/>
+    <img src="right-photo.jpg" class="side-photo" id="right-photo" alt="Right photo"/>
+    <div id="final-text">
+      <p>Happy Mother's Day Maa 💐</p>
+      <p>Thank you for everything.<br>
+         You have always been my inspiration<br>
+         to work hard and never give up.<br>
+         I love you 💖</p>
+    </div>
+    <div id="footer">Made by your coder girl-silppi ;)👩‍💻</div>
+    <!-- Profile photo at the corner near footer -->
+    <img src="profile-photo.jpg" id="coder-photo" alt="Coder Profile Photo" />
+  </div>
+
+  <script>
+    const babyImg = document.getElementById('baby-img');
+    const message = document.getElementById('message');
+    const gameScreen = document.getElementById('game-screen');
+    const finalScreen = document.getElementById('final-screen');
+
+    // Move image randomly on screen
+    function moveBaby() {
+      const maxX = window.innerWidth - 100;
+      const maxY = window.innerHeight - 100;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      babyImg.style.left = `${x}px`;
+      babyImg.style.top = `${y}px`;
+    }
+
+    let moveInterval = setInterval(moveBaby, 1000);
+
+    babyImg.addEventListener('click', () => {
+      clearInterval(moveInterval);
+      message.style.display = 'block';
+      setTimeout(() => {
+        gameScreen.style.display = 'none';
+        finalScreen.style.display = 'block';
+      }, 2000);
+    });
+
+    window.addEventListener('resize', moveBaby);
+    moveBaby(); // Initial position
+  </script>
+</body>
+</html>
