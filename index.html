@@ -19,17 +19,26 @@
     }
 
     .screen {
-      display: none;
       position: absolute;
       width: 100%;
       height: 100%;
+      top: 0;
+      left: 0;
       background-size: cover;
       background-position: center;
+      transition: transform 0.8s ease;
     }
 
     #game-screen {
       background-image: url('bg1.jpg');
-      display: block;
+      z-index: 1;
+      transform: translateX(0%);
+    }
+
+    #swipe-screen {
+      background-image: url('swipe-bg.jpg');
+      z-index: 2;
+      transform: translateX(100%);
     }
 
     #baby-img {
@@ -63,141 +72,80 @@
       text-shadow: 2px 2px 4px black;
     }
 
-    #final-screen {
-      background-image: url('bg2.jpg');
-      color: white;
-      text-align: center;
-      padding-top: 10%;
-    }
-
-    #final-text {
-      font-size: 2em;
-      width: 80%;
-      margin: auto;
-      text-shadow: 2px 2px 6px black;
-    }
-
-    .side-photo {
+    #swipe-button {
       position: absolute;
-      top: 10%;
-      max-width: 300px;
-      height: auto;
-      border-radius: 15px;
-      box-shadow: 0 0 10px white;
-    }
-
-    #left-photo {
-      left: 5%;
-    }
-
-    #right-photo {
-      right: 5%;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 12px 20px;
+      font-size: 1.2em;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: black;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+      z-index: 3;
     }
 
     #footer {
       position: absolute;
       bottom: 20px;
-      width: 100%;
-      text-align: center;
+      right: 20px;
+      text-align: right;
+      color: white;
+      font-size: 1em;
+      text-shadow: 2px 2px 5px black;
+    }
+
+    #footer strong {
       font-size: 1.2em;
-      color: #fff;
-      text-shadow: 1px 1px 4px black;
     }
 
-    #footer span {
-      font-size: 1.5em;
-      font-weight: bold;
-    }
-
-    #coder-photo {
-      position: absolute;
-      bottom: 20px;
-      right: 140px;
+    #footer img {
       width: 50px;
       height: 50px;
       border-radius: 50%;
       box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    }
-
-    .heart {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      background-color: red;
-      clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 50% 75%, 25% 100%, 0% 35%);
-      animation: floatHeart 5s infinite ease-in-out;
-      opacity: 0;
-    }
-
-    @keyframes floatHeart {
-      0% {
-        transform: translateX(0) translateY(0);
-        opacity: 1;
-      }
-      25% {
-        transform: translateX(30px) translateY(-50px);
-      }
-      50% {
-        transform: translateX(-30px) translateY(-100px);
-      }
-      75% {
-        transform: translateX(30px) translateY(-150px);
-      }
-      100% {
-        transform: translateX(0) translateY(-200px);
-        opacity: 0;
-      }
+      margin-top: 5px;
     }
 
     @media (max-width: 600px) {
-      #final-text {
-        font-size: 1.3em;
+      #message {
+        font-size: 1.5em;
       }
-      .side-photo {
-        width: 150px;
+      #swipe-button {
+        font-size: 1em;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Game Screen -->
+  <!-- Slide 1: Game -->
   <div id="game-screen" class="screen">
     <div id="instructions">Tap on the image to catch me, Mumma!</div>
     <img src="your-baby-photo.jpg" alt="Baby Silppi" id="baby-img" />
     <div id="message">Wow! You caught your smarty girl!</div>
   </div>
 
-  <!-- Final Mother's Day Screen -->
-  <div id="final-screen" class="screen">
-    <img src="left-photo.jpg" class="side-photo" id="left-photo" alt="Left photo"/>
-    <img src="right-photo.jpg" class="side-photo" id="right-photo" alt="Right photo"/>
-    <div id="final-text">
-      <p>Happy Mother's Day Maa 💐</p>
-      <p>Thank you for everything.<br>
-         You have always been my inspiration<br>
-         to work hard and never give up.<br>
-         I love you 💖</p>
-    </div>
+  <!-- Slide 2: After swipe -->
+  <div id="swipe-screen" class="screen">
     <div id="footer">
-      <img src="profile-photo.jpg" id="coder-photo" alt="Silppi's Profile Photo" />
-      Made by your coder girl <span>- Silppi</span>
+      Made by your coder gurl<br><strong>Silppi</strong><br>
+      <img src="profile-photo.jpg" alt="Silppi's Profile Photo" />
     </div>
-
-    <!-- Floating Hearts -->
-    <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
-    <div class="heart" style="left: 20%; animation-delay: 1s;"></div>
-    <div class="heart" style="left: 30%; animation-delay: 2s;"></div>
-    <div class="heart" style="left: 50%; animation-delay: 3s;"></div>
-    <div class="heart" style="left: 70%; animation-delay: 4s;"></div>
-    <div class="heart" style="left: 85%; animation-delay: 1.5s;"></div>
   </div>
+
+  <!-- Swipe Button -->
+  <button id="swipe-button">Swipe Right ➡️</button>
 
   <script>
     const babyImg = document.getElementById('baby-img');
     const message = document.getElementById('message');
     const gameScreen = document.getElementById('game-screen');
-    const finalScreen = document.getElementById('final-screen');
+    const swipeScreen = document.getElementById('swipe-screen');
+    const swipeBtn = document.getElementById('swipe-button');
 
     function moveBaby() {
       const maxX = window.innerWidth - 150;
@@ -208,19 +156,20 @@
       babyImg.style.top = `${y}px`;
     }
 
-    let moveInterval = setInterval(moveBaby, 1500); // Moved a little faster
+    let moveInterval = setInterval(moveBaby, 1500);
+    moveBaby();
 
     babyImg.addEventListener('click', () => {
       clearInterval(moveInterval);
       message.style.display = 'block';
-      setTimeout(() => {
-        gameScreen.style.display = 'none';
-        finalScreen.style.display = 'block';
-      }, 2000);
+    });
+
+    swipeBtn.addEventListener('click', () => {
+      gameScreen.style.transform = 'translateX(-100%)';
+      swipeScreen.style.transform = 'translateX(0%)';
     });
 
     window.addEventListener('resize', moveBaby);
-    moveBaby();
   </script>
 
 </body>
