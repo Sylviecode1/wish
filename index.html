@@ -1,88 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catch Baby Silppi If You Can</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f7f7f7;
-        }
-        .game-container {
-            position: relative;
-            width: 100%;
-            height: 500px;
-            margin-top: 50px;
-            overflow: hidden;
-        }
-        .baby-silppi {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background-image: url('baby-silppi.png'); /* Replace with actual image */
-            background-size: cover;
-            cursor: pointer;
-        }
-        .left {
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        .right {
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catch Baby Silppi!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+    }
+
+    .screen {
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+
+    #game-screen {
+      background-image: url('bg1.jpg');
+      display: block;
+    }
+
+    #baby-img {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: top 0.3s, left 0.3s;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    #message {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      font-size: 2em;
+      color: white;
+      text-shadow: 2px 2px 4px black;
+      display: none;
+    }
+
+    #instructions {
+      position: absolute;
+      top: 20%;
+      width: 100%;
+      text-align: center;
+      font-size: 1.5em;
+      color: white;
+      text-shadow: 2px 2px 4px black;
+    }
+
+    #final-screen {
+      background-image: url('bg2.jpg');
+      color: white;
+      text-align: center;
+      padding-top: 10%;
+    }
+
+    #final-text {
+      font-size: 2em;
+      width: 80%;
+      margin: auto;
+      text-shadow: 2px 2px 6px black;
+    }
+
+    .side-photo {
+      position: absolute;
+      top: 10%;
+      max-width: 300px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 0 10px white;
+    }
+
+    #left-photo {
+      left: 5%;
+    }
+
+    #right-photo {
+      right: 5%;
+    }
+
+    #footer {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 1.2em;
+      color: #fff;
+      text-shadow: 1px 1px 4px black;
+    }
+
+    #footer span {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    #coder-photo {
+      position: absolute;
+      bottom: 20px;
+      right: 140px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    .heart {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: red;
+      clip-path: polygon(50% 0%, 100% 35%, 75% 100%, 50% 75%, 25% 100%, 0% 35%);
+      animation: floatHeart 5s infinite ease-in-out;
+      opacity: 0;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+      }
+      25% {
+        transform: translateX(30px) translateY(-50px);
+      }
+      50% {
+        transform: translateX(-30px) translateY(-100px);
+      }
+      75% {
+        transform: translateX(30px) translateY(-150px);
+      }
+      100% {
+        transform: translateX(0) translateY(-200px);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      #final-text {
+        font-size: 1.3em;
+      }
+      .side-photo {
+        width: 150px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Catch Baby Silppi If You Can!</h1>
-    <p>Click on Baby Silppi when she appears!</p>
-    
-    <div class="game-container">
-        <div id="left-image" class="baby-silppi left"></div>
-        <div id="right-image" class="baby-silppi right"></div>
+
+  <!-- Game Screen -->
+  <div id="game-screen" class="screen">
+    <div id="instructions">Tap on the image to catch me, Mumma!</div>
+    <img src="baby-silppi.png" alt="Baby Silppi" id="baby-img" />
+    <div id="message">Wow! You caught your smarty girl!</div>
+  </div>
+
+  <!-- Final Mother's Day Screen -->
+  <div id="final-screen" class="screen">
+    <img src="left-photo.jpg" class="side-photo" id="left-photo" alt="Left photo"/>
+    <img src="right-photo.jpg" class="side-photo" id="right-photo" alt="Right photo"/>
+    <div id="final-text">
+      <p>Happy Mother's Day Maa 💐</p>
+      <p>Thank you for everything.<br>
+         You have always been my inspiration<br>
+         to work hard and never give up.<br>
+         I love you 💖</p>
+    </div>
+    <div id="footer">
+      <img src="profile-photo.jpg" id="coder-photo" alt="Silppi's Profile Photo" />
+      Made by your coder girl <span>- Silppi</span>
     </div>
 
-    <script>
-        let leftImage = document.getElementById('left-image');
-        let rightImage = document.getElementById('right-image');
-        let gameContainer = document.querySelector('.game-container');
-        let score = 0;
-        let scoreElement = document.createElement('p');
-        document.body.appendChild(scoreElement);
-        scoreElement.textContent = "Score: 0";
+    <!-- Floating Hearts -->
+    <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="heart" style="left: 20%; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 50%; animation-delay: 3s;"></div>
+    <div class="heart" style="left: 70%; animation-delay: 4s;"></div>
+    <div class="heart" style="left: 85%; animation-delay: 1.5s;"></div>
+  </div>
 
-        // Function to move the baby Silppi images randomly
-        function moveImage(image) {
-            let containerWidth = gameContainer.offsetWidth;
-            let containerHeight = gameContainer.offsetHeight;
-            let newLeft = Math.random() * (containerWidth - 100);
-            let newTop = Math.random() * (containerHeight - 100);
-            image.style.left = newLeft + 'px';
-            image.style.top = newTop + 'px';
-        }
+  <script>
+    const babyImg = document.getElementById('baby-img');
+    const message = document.getElementById('message');
+    const gameScreen = document.getElementById('game-screen');
+    const finalScreen = document.getElementById('final-screen');
 
-        // Start the game with random movements every 2 seconds
-        setInterval(function() {
-            moveImage(leftImage);
-            moveImage(rightImage);
-        }, 2000);
+    function moveBaby() {
+      const maxX = window.innerWidth - 150;
+      const maxY = window.innerHeight - 150;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      babyImg.style.left = `${x}px`;
+      babyImg.style.top = `${y}px`;
+    }
 
-        // Add click event listeners for both images
-        leftImage.addEventListener('click', function() {
-            score++;
-            scoreElement.textContent = "Score: " + score;
-            moveImage(leftImage); // Move after click
-        });
+    let moveInterval = setInterval(moveBaby, 1500); // Moved a little faster
 
-        rightImage.addEventListener('click', function() {
-            score++;
-            scoreElement.textContent = "Score: " + score;
-            moveImage(rightImage); // Move after click
-        });
-    </script>
+    babyImg.addEventListener('click', () => {
+      clearInterval(moveInterval);
+      message.style.display = 'block';
+      setTimeout(() => {
+        gameScreen.style.display = 'none';
+        finalScreen.style.display = 'block';
+      }, 2000);
+    });
+
+    window.addEventListener('resize', moveBaby);
+    moveBaby();
+  </script>
+
 </body>
 </html>
